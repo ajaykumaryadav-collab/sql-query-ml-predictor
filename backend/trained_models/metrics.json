@@ -1,0 +1,64 @@
+{
+    "best_model": "Histogram Gradient Boosting",
+    "is_log_target": true,
+    "results": {
+        "Histogram Gradient Boosting": {
+            "MAE": 3.9254,
+            "RMSE": 10.5606,
+            "R2": 0.9462,
+            "MAPE": 1286.4252,
+            "FitTimeSec": 1.11
+        },
+        "Random Forest": {
+            "MAE": 4.0084,
+            "RMSE": 10.6728,
+            "R2": 0.945,
+            "MAPE": 1290.8753,
+            "FitTimeSec": 0.36
+        },
+        "XGBoost (Hist)": {
+            "MAE": 4.136,
+            "RMSE": 11.5187,
+            "R2": 0.936,
+            "MAPE": 1288.0867,
+            "FitTimeSec": 3.44
+        }
+    },
+    "total_dataset_samples": 2500,
+    "training_samples": 2000,
+    "testing_samples": 500,
+    "number_of_features": 29,
+    "features": [
+        "startup_cost",
+        "total_cost",
+        "plan_rows",
+        "plan_width",
+        "parallel_aware",
+        "plan_depth",
+        "number_of_plan_nodes",
+        "number_of_tables",
+        "number_of_joins",
+        "number_of_filters",
+        "number_of_sort_nodes",
+        "number_of_aggregate_nodes",
+        "number_of_seq_scans",
+        "number_of_index_scans",
+        "number_of_nested_loop_joins",
+        "number_of_hash_joins",
+        "number_of_merge_joins",
+        "total_scanned_rows",
+        "max_intermediate_rows",
+        "total_tree_cost",
+        "has_hash_join",
+        "has_bitmap_scan",
+        "number_of_bitmap_scans",
+        "max_plan_width",
+        "has_limit",
+        "number_of_limit_nodes",
+        "has_materialize",
+        "output_to_scanned_ratio",
+        "is_unbounded_scan"
+    ],
+    "target_variable": "actual_execution_time",
+    "trained_at": "2026-10-12 16:57:56"
+}
