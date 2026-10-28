@@ -14,6 +14,11 @@ def run_explain(db: Session, query: str, analyze: bool = False):
     try:
         # Wrap the query in EXPLAIN
         if analyze:
+            # Prime database buffer cache so steady-state execution time is measured
+            try:
+                db.execute(text(f"EXPLAIN (ANALYZE) {query}"))
+            except Exception:
+                pass
             explain_query = f"EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON) {query}"
         else:
             explain_query = f"EXPLAIN (FORMAT JSON) {query}"

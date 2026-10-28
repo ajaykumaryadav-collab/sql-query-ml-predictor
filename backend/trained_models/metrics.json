@@ -6,22 +6,22 @@
             "MAE": 3.9254,
             "RMSE": 10.5606,
             "R2": 0.9462,
-            "MAPE": 1286.4252,
-            "FitTimeSec": 1.11
+            "MAPE": 23.4179,
+            "FitTimeSec": 11.27
         },
         "Random Forest": {
             "MAE": 4.0084,
             "RMSE": 10.6728,
             "R2": 0.945,
-            "MAPE": 1290.8753,
-            "FitTimeSec": 0.36
+            "MAPE": 26.1748,
+            "FitTimeSec": 0.66
         },
         "XGBoost (Hist)": {
             "MAE": 4.136,
             "RMSE": 11.5187,
             "R2": 0.936,
-            "MAPE": 1288.0867,
-            "FitTimeSec": 3.44
+            "MAPE": 36.0004,
+            "FitTimeSec": 19.65
         }
     },
     "total_dataset_samples": 2500,
@@ -60,5 +60,5 @@
         "is_unbounded_scan"
     ],
     "target_variable": "actual_execution_time",
-    "trained_at": "2026-10-12 16:57:56"
+    "trained_at": "2026-10-28 18:15:21"
 }

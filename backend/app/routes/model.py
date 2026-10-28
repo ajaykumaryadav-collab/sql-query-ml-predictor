@@ -63,8 +63,13 @@ def retrain_from_history(db: Session = Depends(get_db)):
     df_new = pd.DataFrame(new_rows)
     csv_path = Path(DEFAULT_DATASET_PATH)
 
-    # Append to dataset
+    # Append to dataset matching existing CSV schema
     if csv_path.exists():
+        expected_cols = pd.read_csv(csv_path, nrows=0).columns.tolist()
+        for col in expected_cols:
+            if col not in df_new.columns:
+                df_new[col] = 0.0
+        df_new = df_new[expected_cols]
         df_new.to_csv(csv_path, mode="a", header=False, index=False)
     else:
         df_new.to_csv(csv_path, mode="w", header=True, index=False)

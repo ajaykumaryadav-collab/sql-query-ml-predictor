@@ -32,16 +32,49 @@ import PlanVisualizer from '../components/PlanVisualizer';
 
 const QUERY_TEMPLATES = [
   {
-    name: "30-Day City Revenue",
-    query: `SELECT c.city, COUNT(o.id) AS total_orders, SUM(o.total_amount) AS revenue
-FROM customers c
-JOIN orders o ON c.id = o.customer_id
-WHERE o.order_date >= CURRENT_DATE - INTERVAL '30 days'
-GROUP BY c.city
-ORDER BY revenue DESC;`
+    name: "Customer Orders",
+    category: "2-Table Join",
+    query: `SELECT c.name, c.city, o.id, o.total_amount 
+FROM customers c 
+JOIN orders o ON c.id = o.customer_id 
+WHERE c.city = 'Chicago' AND o.status = 'COMPLETED' 
+LIMIT 50;`
   },
   {
-    name: "VIP Customers (CTE)",
+    name: "Recent Orders by Date",
+    category: "Date Range",
+    query: `SELECT id, customer_id, total_amount, status 
+FROM orders 
+WHERE order_date >= '2026-09-01' AND status = 'COMPLETED' 
+LIMIT 100;`
+  },
+  {
+    name: "Payment Method Filter",
+    category: "Point Scan",
+    query: `SELECT pay.id, pay.method, pay.amount 
+FROM payments pay 
+WHERE pay.method = 'CREDIT_CARD' AND pay.amount > 1500 
+LIMIT 100;`
+  },
+  {
+    name: "Unindexed Status Scan",
+    category: "Index Advisor",
+    query: `SELECT id, customer_id, total_amount, status 
+FROM orders 
+WHERE status = 'CANCELLED' AND total_amount > 2000 
+LIMIT 50;`
+  },
+  {
+    name: "Customer City Lookup",
+    category: "Indexed Lookup",
+    query: `SELECT id, name, email, city 
+FROM customers 
+WHERE city = 'Chicago' AND email LIKE 'customer1%@example.com' 
+LIMIT 20;`
+  },
+  {
+    name: "Heavy Analytics CTE",
+    category: "Stress Test",
     query: `WITH customer_totals AS (
     SELECT customer_id, 
            COUNT(id) AS order_count, 
@@ -56,33 +89,6 @@ FROM customers c
 JOIN customer_totals ct ON c.id = ct.customer_id
 ORDER BY ct.total_spent DESC
 LIMIT 10;`
-  },
-  {
-    name: "Unindexed Status Scan",
-    query: `SELECT * 
-FROM orders 
-WHERE total_amount > 1000 AND status = 'CANCELLED';`
-  },
-  {
-    name: "Subquery Anti-Pattern",
-    query: `SELECT c.name, c.city, c.email
-FROM customers c
-WHERE c.id IN (
-    SELECT o.customer_id 
-    FROM orders o 
-    WHERE o.total_amount > 4000
-)
-ORDER BY c.name;`
-  },
-  {
-    name: "Category Breakdown",
-    query: `SELECT category, 
-       COUNT(*) AS product_count, 
-       ROUND(AVG(price), 2) AS avg_price, 
-       MIN(price) AS min_price, 
-       MAX(price) AS max_price
-FROM products 
-GROUP BY category;`
   }
 ];
 
@@ -237,20 +243,41 @@ const Analyzer = () => {
         </div>
       </div>
 
-      {/* Quick Templates Bar */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-        <span className="text-gray-400 font-semibold flex items-center gap-1">
-          <Zap className="w-3.5 h-3.5 text-amber-500" /> Templates:
-        </span>
-        {QUERY_TEMPLATES.map((tmpl, idx) => (
-          <button
-            key={idx}
-            onClick={() => setQuery(tmpl.query)}
-            className="px-2.5 py-1 bg-gray-100 hover:bg-indigo-50 hover:text-indigo-600 text-gray-600 rounded-md border border-gray-200 transition-all whitespace-nowrap"
-          >
-            {tmpl.name}
-          </button>
-        ))}
+      {/* Quick Example Queries Bar */}
+      <div className="bg-white p-3.5 rounded-xl border border-gray-200/90 shadow-sm space-y-2.5">
+        <div className="flex items-center gap-1.5 text-xs font-bold text-gray-700">
+          <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+          <span>Quick Example Queries</span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+          {QUERY_TEMPLATES.map((tmpl, idx) => {
+            const isSelected = query.trim() === tmpl.query.trim();
+            return (
+              <button
+                key={idx}
+                onClick={() => {
+                  setQuery(tmpl.query);
+                  setResult(null);
+                  setExecutionResult(null);
+                  setError(null);
+                }}
+                className={`p-2.5 rounded-lg border text-left transition-all flex flex-col gap-1 ${
+                  isSelected
+                    ? "bg-indigo-50/80 border-indigo-400 ring-2 ring-indigo-200 shadow-sm"
+                    : "bg-gray-50/70 hover:bg-white border-gray-200 hover:border-indigo-200"
+                }`}
+              >
+                <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider">
+                  {tmpl.category}
+                </span>
+                <span className="text-xs font-semibold text-gray-900 leading-tight">
+                  {tmpl.name}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Monaco SQL Editor */}

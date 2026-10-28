@@ -43,7 +43,7 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DATASETS_DIR = BASE_DIR / "datasets"
 MODELS_DIR = BASE_DIR / "trained_models"
-DEFAULT_DATASET_PATH = DATASETS_DIR / "dataset_deep_features.csv"
+DEFAULT_DATASET_PATH = DATASETS_DIR / "dataset_v3_balanced.csv"
 MODEL_PATH = MODELS_DIR / "best_model.joblib"
 METRICS_PATH = MODELS_DIR / "metrics.json"
 LOG_FILE_PATH = DATASETS_DIR / "training_deep.log"
@@ -66,7 +66,8 @@ FEATURE_COLUMNS = [
     "number_of_merge_joins",
     "total_scanned_rows", "max_intermediate_rows", "total_tree_cost",
     "has_hash_join", "has_bitmap_scan", "number_of_bitmap_scans",
-    "max_plan_width"
+    "max_plan_width", "has_limit", "number_of_limit_nodes",
+    "has_materialize", "output_to_scanned_ratio", "is_unbounded_scan"
 ]
 TARGET_COLUMN = "actual_execution_time"
 
@@ -324,9 +325,11 @@ def gather_data_stream(
 
 
 def mean_absolute_percentage_error(y_true, y_pred):
-    y_t = pd.Series(y_true)
-    y_p = pd.Series(y_pred)
-    return (abs((y_t - y_p) / y_t).replace([float('inf'), -float('inf')], 0).fillna(0).mean()) * 100.0
+    y_t = np.array(y_true, dtype=float)
+    y_p = np.array(y_pred, dtype=float)
+    # Floor denominator at 1.0 ms to avoid artificial explosion from microsecond noise
+    effective_base = np.maximum(y_t, 1.0)
+    return float(np.mean(np.abs(y_t - y_p) / effective_base) * 100.0)
 
 
 def train_models_from_csv(csv_path: Path):
