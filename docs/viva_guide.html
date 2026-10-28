@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SQL Query ML Predictor - Project Review & Viva Comprehensive Guide</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 14mm 14mm 14mm 14mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.5;
+      font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .avoid-break {
+      page-break-inside: avoid;
+    }
+
+    /* Cover / Header */
+    .header-banner {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%);
+      color: white;
+      padding: 24px 28px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .header-banner h1 {
+      font-size: 20pt;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+      color: #ffffff;
+    }
+
+    .header-banner .subtitle {
+      font-size: 12pt;
+      color: #c7d2fe;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 8.5pt;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* Typography */
+    h2 {
+      font-size: 14pt;
+      color: #1e1b4b;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-top: 18px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      color: #3730a3;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      color: #334155;
+      text-align: justify;
+    }
+
+    /* Callout Boxes */
+    .callout {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 9.5pt;
+      border-left: 4px solid;
+    }
+
+    .callout-indigo {
+      background: #eef2ff;
+      border-left-color: #4f46e5;
+      color: #312e81;
+    }
+
+    .callout-emerald {
+      background: #ecfdf5;
+      border-left-color: #10b981;
+      color: #064e3b;
+    }
+
+    .callout-amber {
+      background: #fffbeb;
+      border-left-color: #f59e0b;
+      color: #78350f;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: block;
+      font-size: 10pt;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 16px 0;
+      font-size: 9pt;
+    }
+
+    th, td {
+      padding: 7px 10px;
+      text-align: left;
+      border: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 8pt;
+      letter-spacing: 0.5px;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .badge-champion {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 7.5pt;
+      border: 1px solid #bbf7d0;
+    }
+
+    .badge-active {
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 7.5pt;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 12px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    }
+
+    .card-title {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .card-value {
+      font-size: 15pt;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .card-subtext {
+      font-size: 7.5pt;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+
+    /* Code & Feature Tags */
+    .code-block {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 8.5pt;
+      line-height: 1.4;
+      margin: 10px 0;
+      overflow-x: hidden;
+    }
+
+    .code-keyword { color: #38bdf8; font-weight: bold; }
+    .code-string { color: #a3e635; }
+    .code-comment { color: #94a3b8; font-style: italic; }
+
+    .feature-tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 8px 0;
+    }
+
+    .feature-tag {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+      padding: 3px 7px;
+      border-radius: 5px;
+      font-family: ui-monospace, monospace;
+      font-size: 7.5pt;
+      font-weight: 600;
+    }
+
+    /* Q&A Section */
+    .qa-box {
+      margin-bottom: 14px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .qa-question {
+      background: #f8fafc;
+      padding: 9px 12px;
+      font-weight: 700;
+      color: #1e1b4b;
+      font-size: 9.5pt;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      gap: 6px;
+    }
+
+    .qa-answer {
+      padding: 10px 12px;
+      font-size: 9pt;
+      color: #334155;
+      background: #ffffff;
+      line-height: 1.5;
+    }
+
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    li {
+      margin-bottom: 4px;
+      color: #334155;
+      font-size: 9.5pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / BANNER -->
+  <div class="header-banner">
+    <h1>SQL Query Execution Time & Cost Predictor</h1>
+    <div class="subtitle">Comprehensive Project Review, Architecture Guide & Viva Master Preparation</div>
+    <div class="meta-pills">
+      <span class="pill">Stack: FastAPI + React + PostgreSQL</span>
+      <span class="pill">ML: HistGradientBoosting & Random Forest</span>
+      <span class="pill">R² Score: 94.62%</span>
+      <span class="pill">Active Learning: Online History Retraining</span>
+      <span class="pill">Tooling: Docker Compose</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1: ELEVATOR PITCH -->
+  <div class="avoid-break">
+    <h2>1. The 30-Second Elevator Pitch</h2>
+    <div class="callout callout-indigo">
+      <span class="callout-title">Memorize This for Your Opening Statement:</span>
+      <em>"Our project is an AI-driven SQL Query Performance Predictor and Optimizer. Traditional relational databases like PostgreSQL use static mathematical cost formulas that often fail on complex multi-table joins or skewed data distributions. We built an end-to-end platform that extracts <strong>29 deep structural and relational plan features</strong> from PostgreSQL's JSON query execution trees and feeds them into trained Machine Learning models (Histogram Gradient Boosting and Random Forest) to predict actual execution latency in milliseconds before running the query. Beyond prediction, the platform includes real-time <strong>ReactFlow plan visualization</strong>, <strong>automated SQL rewriting</strong>, and <strong>isolated What-If index simulations</strong> to diagnose and resolve database bottlenecks."</em>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PROBLEM STATEMENT -->
+  <div class="avoid-break">
+    <h2>2. Problem Statement & Motivation</h2>
+    <p>Database Query Optimizers (such as PostgreSQL's Cost-Based Optimizer) choose execution paths based on mathematical cost formulas derived from statistics (pg_statistic). While effective for basic queries, these estimators face fundamental challenges:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 25%;">Challenge</th>
+          <th style="width: 37%;">PostgreSQL Native Cost Estimator</th>
+          <th style="width: 38%;">Our Machine Learning Approach</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Measurement Unit</strong></td>
+          <td>Arbitrary unitless cost points (e.g. 100.5). Cost does <em>not</em> equal milliseconds.</td>
+          <td>Predicts <strong>wall-clock time directly in milliseconds (ms)</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Hardware Adaptation</strong></td>
+          <td>Static disk/CPU page costs (`seq_page_cost = 1.0`). Misses memory bus & CPU cache effects.</td>
+          <td>Learns empirical execution behavior on the target physical/cloud hardware.</td>
+        </tr>
+        <tr>
+          <td><strong>Estimation Drift</strong></td>
+          <td>Assumes column independence; errors multiply exponentially across multi-table joins.</td>
+          <td>Ensemble trees capture high-order non-linear interactions across plan nodes.</td>
+        </tr>
+        <tr>
+          <td><strong>Proactive Tuning</strong></td>
+          <td>Static advisory; requires manual DBA intervention to diagnose slow queries.</td>
+          <td>Real-time bottleneck hotspot detection + automated index simulation with zero risk.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 3: SYSTEM ARCHITECTURE -->
+  <div class="avoid-break">
+    <h2>3. End-to-End System Architecture</h2>
+    <p>The system is deployed as three decoupled, containerized services using Docker Compose:</p>
+
+    <div class="code-block">
++-----------------------------------------------------------------------------------+
+|                           REACT 18 FRONTEND (Port 5173)                           |
+| Monaco SQL Editor | ReactFlow Plan Tree | Recharts Visuals | What-If Simulation UI|
++-----------------------------------------+-----------------------------------------+
+                                          | REST API (JSON)
++-----------------------------------------v-----------------------------------------+
+|                            FASTAPI BACKEND (Port 8000)                            |
+| 1. SQL Validator (Blocks DDL/DML)   2. EXPLAIN JSON Parser   3. 29 Feature Engine |
+| 4. ML Model Inference Engine        5. Rule-Based Rewriter   6. History Collector |
++-----------------------------------------+-----------------------------------------+
+                                          | SQLAlchemy Core
++-----------------------------------------v-----------------------------------------+
+|                        POSTGRESQL 15 DATABASE (Port 5432)                         |
+| Relational Schema (customers, orders, items) | Transactional Rollback Index Tests |
++-----------------------------------------------------------------------------------+
+    </div>
+
+    <ul>
+      <li><strong>PostgreSQL 15 Container:</strong> Hosts synthetic e-commerce schema with 250,000+ relational records across <code>customers</code>, <code>orders</code>, <code>order_items</code>, <code>products</code>, and <code>payments</code>, plus query history tracking.</li>
+      <li><strong>FastAPI Microservice:</strong> Asynchronous Python backend executing plan extraction, AST SQL validation, feature engineering, ML inference, and automated optimizer rules.</li>
+      <li><strong>Vite + React Frontend:</strong> High-performance SPA with Monaco editor, interactive drag-and-drop plan tree visualizer, and live monitoring dashboards.</li>
+    </ul>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 4: ML PIPELINE & 29 FEATURES -->
+  <div class="avoid-break">
+    <h2>4. Machine Learning Pipeline & Mathematical Foundations</h2>
+    <p>The model does not treat SQL as plain text (like NLP). Instead, it evaluates the <strong>physical relational execution plan</strong> generated by the query compiler. This guarantees query-invariant representations regardless of SQL syntax formatting.</p>
+
+    <h3>A. The 29 Extracted Features (Feature Engineering)</h3>
+    <p>Our recursive parser (<code>feature_extractor.py</code>) walks the entire PostgreSQL plan tree and extracts 29 numerical and structural features:</p>
+
+    <div class="feature-tag-container">
+      <span class="feature-tag">startup_cost</span>
+      <span class="feature-tag">total_cost</span>
+      <span class="feature-tag">plan_rows</span>
+      <span class="feature-tag">plan_width</span>
+      <span class="feature-tag">parallel_aware</span>
+      <span class="feature-tag">plan_depth</span>
+      <span class="feature-tag">number_of_plan_nodes</span>
+      <span class="feature-tag">number_of_tables</span>
+      <span class="feature-tag">number_of_joins</span>
+      <span class="feature-tag">number_of_filters</span>
+      <span class="feature-tag">number_of_sort_nodes</span>
+      <span class="feature-tag">number_of_aggregate_nodes</span>
+      <span class="feature-tag">number_of_seq_scans</span>
+      <span class="feature-tag">number_of_index_scans</span>
+      <span class="feature-tag">number_of_nested_loop_joins</span>
+      <span class="feature-tag">number_of_hash_joins</span>
+      <span class="feature-tag">number_of_merge_joins</span>
+      <span class="feature-tag">total_scanned_rows</span>
+      <span class="feature-tag">max_intermediate_rows</span>
+      <span class="feature-tag">total_tree_cost</span>
+      <span class="feature-tag">has_hash_join</span>
+      <span class="feature-tag">has_bitmap_scan</span>
+      <span class="feature-tag">number_of_bitmap_scans</span>
+      <span class="feature-tag">max_plan_width</span>
+      <span class="feature-tag">has_limit</span>
+      <span class="feature-tag">number_of_limit_nodes</span>
+      <span class="feature-tag">has_materialize</span>
+      <span class="feature-tag">output_to_scanned_ratio</span>
+      <span class="feature-tag">is_unbounded_scan</span>
+    </div>
+
+    <h3>B. Mathematical Formulation & Target Log-Transformation</h3>
+    <p>Query execution latency spans 4 to 5 orders of magnitude (from 0.05 ms to 500+ ms). Directly minimizing Mean Squared Error (MSE) would cause the regressor to fit only massive queries while ignoring smaller queries. To resolve this, we apply a <strong>Log1p transformation</strong>:</p>
+    
+    <div class="code-block">
+y_transformed = log(1 + actual_execution_time_ms)
+prediction = exp(model.predict(features)) - 1
+    </div>
+
+    <h3>C. Model Tournament Benchmark & Production Selection</h3>
+    <p>We trained and evaluated three champion regression algorithms on 2,500 real execution profiles:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>R² Score (Accuracy)</th>
+          <th>MAE (Mean Absolute Error)</th>
+          <th>RMSE</th>
+          <th>MAPE (Normalized)</th>
+          <th>Training Speed</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background: #eef2ff; font-weight: bold;">
+          <td>Histogram Gradient Boosting</td>
+          <td>94.62%</td>
+          <td>3.92 ms</td>
+          <td>10.56 ms</td>
+          <td>23.41%</td>
+          <td>11.27 s</td>
+          <td><span class="badge-champion">Champion (Active)</span></td>
+        </tr>
+        <tr>
+          <td>Random Forest Regressor</td>
+          <td>94.50%</td>
+          <td>4.01 ms</td>
+          <td>10.67 ms</td>
+          <td>26.17%</td>
+          <td>0.66 s</td>
+          <td><span class="badge-active">Benchmarked</span></td>
+        </tr>
+        <tr>
+          <td>XGBoost (Hist)</td>
+          <td>93.60%</td>
+          <td>4.14 ms</td>
+          <td>11.52 ms</td>
+          <td>36.00%</td>
+          <td>19.65 s</td>
+          <td><span class="badge-active">Benchmarked</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p><em>Why HistGradientBoosting won:</em> Native histogram binning handles continuous relational plan costs with minimal memory footprint while achieving the highest R² (0.9462).</p>
+  </div>
+
+  <div class="avoid-break">
+    <h2>5. Deep Dive: The Database Performance Dashboard (`/`)</h2>
+    <p>The Dashboard serves as the command center for monitoring query traffic, server health, and model performance over time. It is driven by the <code>/api/dashboard/analytics</code> endpoint.</p>
+
+    <div class="grid-4">
+      <div class="card">
+        <div class="card-title">Total Queries</div>
+        <div class="card-value">2,500+</div>
+        <div class="card-subtext">Captured with plan telemetry</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Avg Actual Latency</div>
+        <div class="card-value">12.4 ms</div>
+        <div class="card-subtext">Real database execution</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Avg Predicted Latency</div>
+        <div class="card-value">11.8 ms</div>
+        <div class="card-subtext">ML model inference time</div>
+      </div>
+      <div class="card">
+        <div class="card-title">High Cost Alerts</div>
+        <div class="card-value">Low (3%)</div>
+        <div class="card-subtext">Queries running > 500ms</div>
+      </div>
+    </div>
+
+    <h3>Dashboard Components Explained:</h3>
+    <ul>
+      <li><strong>KPI Stat Cards:</strong> Summarize high-level execution volume, mean actual vs. predicted execution latency, and overall normalized error percentage.</li>
+      <li><strong>Query Execution Latency Distribution:</strong> A Recharts bar histogram categorizing queries into execution time buckets (<code>&lt;1ms</code>, <code>1-5ms</code>, <code>5-20ms</code>, <code>20-100ms</code>, <code>&gt;100ms</code>). This visually proves that the workload reflects real-world multi-tiered database operations.</li>
+      <li><strong>Prediction Accuracy Trend Chart:</strong> A dual-line chart plotting actual vs. predicted execution time across recent queries, highlighting how closely the ML inference tracks actual PostgreSQL execution.</li>
+      <li><strong>Workload Category Breakdown:</strong> Donut/pie distribution showing the proportion of <em>Fast (&lt;5ms)</em>, <em>Moderate (5-50ms)</em>, and <em>Expensive (&gt;50ms)</em> queries.</li>
+      <li><strong>Slowest Queries Diagnostic Table:</strong> Ranks top resource-consuming queries with a one-click <em>"Analyze Query"</em> button that loads the problematic query directly into the Analyzer for tuning.</li>
+    </ul>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 6: MODEL METRICS -->
+  <div class="avoid-break">
+    <h2>6. Deep Dive: Model Performance & Active Learning (`/metrics`)</h2>
+    <p>The Model Metrics page provides complete transparency into machine learning behavior, comparative model evaluation, and continuous learning capabilities. Driven by <code>/api/model/metrics</code> and <code>/api/model/retrain</code>.</p>
+
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">Champion Algorithm</div>
+        <div class="card-value" style="font-size: 13pt; color: #4f46e5;">HistGradientBoosting</div>
+        <div class="card-subtext">Target: Log-Scale (log1p)</div>
+      </div>
+      <div class="card">
+        <div class="card-title">R² Accuracy Score</div>
+        <div class="card-value" style="color: #16a34a;">94.62%</div>
+        <div class="card-subtext">Explains 94.6% of latency variance</div>
+      </div>
+      <div class="card">
+        <div class="card-title">Deep Feature Vectors</div>
+        <div class="card-value">29 Features</div>
+        <div class="card-subtext">Cost, scan, join, and size metrics</div>
+      </div>
+    </div>
+
+    <h3>Key Capabilities of the Metrics Page:</h3>
+    <ul>
+      <li><strong>Model Tournament Leaderboard:</strong> Compares MAE, RMSE, R² Score, and Training Time across all algorithms, explicitly identifying which model is currently active in production.</li>
+      <li><strong>Error Metric Comparison Bar Chart:</strong> Visualizes MAE and RMSE side-by-side using Recharts, making it easy to explain to reviewers why the champion model was selected.</li>
+      <li><strong>Active Feature Vectors Display:</strong> Lists all 29 structural plan features currently consumed by the model, showing examiners that feature engineering goes far deeper than basic SQL length or table count.</li>
+      <li><strong>Continuous Active Retraining ("Self-Tune from History"):</strong>
+        <p>A distinctive capability of this project is its ability to learn continuously. As users execute new queries in the Analyzer, their execution telemetry (plan tree, features, and actual execution time) is saved to the <code>query_history</code> table. Clicking <strong>"Self-Tune from History"</strong> triggers an asynchronous retraining pipeline that:</p>
+        <ol>
+          <li>Extracts newly recorded execution samples from the database.</li>
+          <li>Appends them to the balanced training dataset.</li>
+          <li>Re-fits the models and compares new evaluation scores.</li>
+          <li>Hot-swaps the production <code>best_model.joblib</code> artifact without server restart.</li>
+        </ol>
+      </li>
+    </ul>
+  </div>
+
+  <!-- SECTION 7: QUERY ANALYZER & OPTIMIZER -->
+  <div class="avoid-break">
+    <h2>7. Deep Dive: Query Analyzer, Visualizer & Optimizer (`/analyzer`)</h2>
+    <p>The Query Analyzer is the core interactive interface of the system, combining five specialized capabilities in one unified view:</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title" style="color: #4338ca;">1. Monaco SQL Editor & Quick Examples</div>
+        <p style="font-size: 8.5pt; margin-top: 4px;">Industry-standard code editor with syntax highlighting, auto-formatting, and a one-click Quick Examples bar containing 6 diverse queries (Joins, Date Ranges, Point Scans, Unindexed Scans, Lookups, and CTE Stress Tests).</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: #059669;">2. Real-Time ML Predictor & Telemetry</div>
+        <p style="font-size: 8.5pt; margin-top: 4px;">Displays predicted execution time (ms), PostgreSQL native estimated cost, and estimated rows. Clicking "Execute & Validate" triggers live database execution to measure actual duration and validation error.</p>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: #dc2626;">3. Interactive ReactFlow Plan Tree</div>
+        <p style="font-size: 8.5pt; margin-top: 4px;">Visual graph mapping out the execution tree from table scans to final output. Nodes feature dynamic color-coded hotspot detection:</p>
+        <ul style="font-size: 8pt; margin: 4px 0 0 16px;">
+          <li>🔴 <strong>Critical Hotspot:</strong> Consumes &gt;40% of plan cost/time.</li>
+          <li>🟡 <strong>Moderate Load:</strong> Consumes 15-40% of cost/time.</li>
+          <li>🟢 <strong>Fast:</strong> Low-cost indexed lookup or node.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title" style="color: #d97706;">4. What-If Index Simulation & Rewriting</div>
+        <p style="font-size: 8.5pt; margin-top: 4px;">Identifies missing indexes on sequential scans. Provides a <strong>Simulate Index</strong> button that tests index creation in an isolated database transaction with rollback. Also features rule-based SQL rewriting (e.g. anti-pattern subquery to JOIN).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 8: STEP-BY-STEP LIVE DEMO -->
+  <div class="avoid-break">
+    <h2>8. Step-by-Step Live Demonstration Walkthrough</h2>
+    <div class="callout callout-emerald">
+      <span class="callout-title">Follow this exact sequence during your demonstration to impress the reviewers:</span>
+    </div>
+
+    <ol>
+      <li><strong>Step 1: Open the Query Analyzer (<code>/analyzer</code>)</strong>
+        <p>Show the interface and point to the <strong>Quick Example Queries</strong> bar at the top. Click on <strong>"Customer Orders"</strong> (a 2-table join). Point out the Monaco editor syntax and show how the editor loads cleanly.</p>
+      </li>
+      <li><strong>Step 2: Run "Execute & Validate"</strong>
+        <p>Click the green <strong>"Execute & Validate"</strong> button. Point to the results panel:</p>
+        <ul>
+          <li>Show the <strong>PostgreSQL Estimated Cost</strong> (e.g. ~145.2).</li>
+          <li>Show the <strong>ML Predicted Execution Time</strong> (e.g. ~0.19 ms).</li>
+          <li>Show the <strong>Actual Execution Time</strong> (e.g. ~0.18 ms) and highlight the accurate correlation.</li>
+        </ul>
+      </li>
+      <li><strong>Step 3: Showcase the ReactFlow Execution Tree</strong>
+        <p>Scroll down to the interactive query plan tree. Zoom in/out and drag the canvas. Show how data flows from the sequential/index scan nodes at the bottom up through the Hash Join into the final output node.</p>
+      </li>
+      <li><strong>Step 4: Demonstrate Bottleneck Detection & What-If Simulation</strong>
+        <p>Click the <strong>"Unindexed Status Scan"</strong> example. The query filters on <code>status = 'CANCELLED'</code> on the <code>orders</code> table. Run it.</p>
+        <ul>
+          <li>Show how the plan visualizer highlights the Sequential Scan node as a <strong>Critical Hotspot (in Red)</strong>.</li>
+          <li>Open the <strong>Optimizer & Index Advisor</strong> panel below. Show the recommendation: <em>"Create index on orders(status)"</em>.</li>
+          <li>Click <strong>"Simulate Index"</strong>. Explain to the professor: <em>"The system just executed a What-If simulation inside an isolated transaction and rolled it back — showing the exact cost reduction without altering our production schema."</em></li>
+        </ul>
+      </li>
+      <li><strong>Step 5: Navigate to the Dashboard (<code>/</code>) and Model Metrics (<code>/metrics</code>)</strong>
+        <p>Switch to the Dashboard tab to show historical query volume and execution distributions. Then switch to the Metrics tab and highlight the <strong>94.62% R² Score</strong> across 2,500 samples, explaining that the project benchmarks multiple algorithms.</p>
+      </li>
+    </ol>
+  </div>
+
+  <!-- SECTION 9: TOP VIVA QUESTIONS & WINNING ANSWERS -->
+  <div class="avoid-break">
+    <h2>9. Top 10 Viva Questions & Winning Answers</h2>
+
+    <div class="qa-box">
+      <div class="qa-question"><span>Q1:</span> Why do we need Machine Learning when PostgreSQL already has a built-in cost estimator?</div>
+      <div class="qa-answer">
+        <strong>Winning Answer:</strong> PostgreSQL's native cost estimator uses static, theoretical formulas based on arbitrary cost units (e.g. 1.0 for sequential page cost). It does not output milliseconds. A cost of 100 could take 0.5ms on an NVMe SSD or 40ms under heavy disk I/O. Furthermore, static estimators assume column independence, leading to massive estimation drift on complex multi-table joins. Our ML model learns from empirical execution runs on actual hardware and directly predicts wall-clock execution time in milliseconds.
+      </div>
+    </div>
+
+    <div class="qa-box">
+      <div class="qa-question"><span>Q2:</span> Why did you choose Histogram Gradient Boosting and Random Forest over Deep Neural Networks?</div>
+      <div class="qa-answer">
+        <strong>Winning Answer:</strong> Research consistently shows that for tabular, structured numerical data with non-linear relationships, tree-based ensemble models (Gradient Boosting and Random Forest) outperform Deep Neural Networks. They achieve higher accuracy with lower sample requirements, train in seconds instead of hours, do not require GPU hardware, and provide direct feature interpretability without the risk of overfitting.
+      </div>
+    </div>
+
+    <div class="qa-box">
+      <div class="qa-question"><span>Q3:</span> Why did you apply a Log1p transformation to the target variable?</div>
+      <div class="qa-answer">
+        <strong>Winning Answer:</strong> SQL query execution times exhibit a heavy-tailed, exponential distribution spanning from 0.05 ms for indexed lookups to over 500 ms for large scans. If we trained directly on raw milliseconds, the regression loss function (MSE) would be dominated by high-latency queries, completely ignoring accuracy on sub-millisecond queries. By taking $y = \log(1 + \text{time})$, we normalize the variance and ensure balanced sensitivity across both fast and slow queries.
+      </div>
+    </div>
+
+    <div class="qa-box">
+      <div class="qa-question"><span>Q4:</span> Why can percentage error look high on sub-millisecond queries?</div>
+      <div class="qa-answer">
+        <strong>Winning Answer:</strong> For queries executing in 0.08 ms, a difference of just 0.05 ms produces a mathematical error of over 60% due to the near-zero denominator. In real-world database systems, a 0.05 ms variance is completely negligible microsecond noise. That is why statistical standards for query regression focus on <strong>Mean Absolute Error (MAE = 3.92 ms)</strong> and <strong>$R^2$ Score (0.9462)</strong> rather than raw percentage error.
+      </div>
+    </div>
+
+    <div class="qa-box">
+      <div class="qa-question"><span>Q5:</span> How does database buffer caching affect the ML prediction?</div>
+      <div class="qa-answer">
+        <strong>Winning Answer:</strong> PostgreSQL caches disk pages in its Shared Buffers RAM. The first time a query executes (cold cache), it may experience disk I/O latency; subsequent executions (warm cache) read directly from memory and run much faster. In our backend, we prime the buffer cache to measure consistent steady-state execution time, eliminating random disk latency spikes.
+      </div>
+    </div>
+
+    <div class="qa-box">
+      <div class="qa-question"><span>Q6:</span> How does the What-If Index Simulation work without affecting production data?</div>
+      <div class="qa-answer">
+        <strong>Winning Answer:</strong> We leverage PostgreSQL's transactional DDL support. We open an explicit transaction block (<code>BEGIN</code>), create the suggested index, run <code>EXPLAIN</code> to measure the cost reduction on the new index, and immediately issue a <code>ROLLBACK</code>. The index is never permanently committed, zero production storage is used, and no locks are held.
+      </div>
+    </div>
+
+    <div class="qa-box">
+      <div class="qa-question"><span>Q7:</span> How do you prevent SQL Injection and destructive queries?</div>
+      <div class="qa-answer">
+        <strong>Winning Answer:</strong> We implemented a strict whitelist validator in <code>sql_validator.py</code>. The backend verifies that incoming queries strictly begin with <code>SELECT</code> or <code>WITH</code> statements. Any query containing destructive keywords such as <code>DROP</code>, <code>DELETE</code>, <code>UPDATE</code>, <code>INSERT</code>, <code>ALTER</code>, or <code>TRUNCATE</code> is immediately rejected before reaching PostgreSQL.
+      </div>
+    </div>
+
+    <div class="qa-box">
+      <div class="qa-question"><span>Q8:</span> How does the system handle continuous learning and model drift?</div>
+      <div class="qa-answer">
+        <strong>Winning Answer:</strong> The system logs query execution telemetry into <code>query_history</code>. Through the <em>"Self-Tune from History"</em> feature on the Metrics page, the backend extracts recent execution profiles, appends them to the balanced training dataset, and re-fits the model to adapt to newly introduced query patterns or data volume changes.
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
